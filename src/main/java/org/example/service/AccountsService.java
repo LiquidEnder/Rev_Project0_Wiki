@@ -133,7 +133,13 @@ public class AccountsService implements ServiceInterface <AccountsEntity, Accoun
 	public int Login(String username, String password)
 	{
 		Optional<Account> user;
-		user = getModelByUsername(username);
+		try {
+			user = getModelByUsername(username);
+		}
+		catch (RuntimeException e)
+		{
+			user = Optional.empty();
+		}
 
 		if(user.isPresent() && user.get().getPassword().equals(password)) {
 				return user.get().getId();
@@ -143,3 +149,4 @@ public class AccountsService implements ServiceInterface <AccountsEntity, Accoun
 		}
 	}
 }
+
