@@ -1,0 +1,23 @@
+CREATE TABLE accounts(
+    account_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    user_password VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE pages(
+    page_id SERIAL PRIMARY KEY,
+    page_title VARCHAR(128) UNIQUE,
+    page_content VARCHAR(4095)
+);
+
+CREATE TABLE edits(
+    id SERIAL PRIMARY KEY,
+    page_id INT NOT NULL,
+    account_id INT,
+    edited_When TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    page_content VARCHAR(4095),
+    FOREIGN KEY(page_id) REFERENCES pages(page_id) ON DELETE CASCADE,
+    FOREIGN KEY(account_id) REFERENCES accounts(account_id) ON DELETE SET NULL
+);
+
+INSERT INTO accounts (account_id, username, user_password) values (0, 'Admin', 'ADMIN');
