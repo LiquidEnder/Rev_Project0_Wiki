@@ -42,7 +42,7 @@ public class AccountsController {
 			int choice = InputHandler.getIntInput("Enter your choice: ");
 
 			//only admins can mess with accounts.
-			if(isAdmin) choice = 0;
+			if(!isAdmin) choice = 0;
 
 			switch(choice){
 				case 1 -> addAccount();
@@ -135,3 +135,4 @@ public class AccountsController {
 		return id;
 	}
 }
+
